@@ -60,8 +60,8 @@ class Game:
 
     def board_matrix(self):
         matrix = []
-        temp = "+" + "-" * self.width + "+"
-        matrix.append(list(temp))
+        temp = f"+{self.width * '-'}+"
+        matrix.append([temp])
         pos = self.snake.body
         for i in range(self.height):
             temp = "|"
@@ -76,10 +76,10 @@ class Game:
                 elif not body:
                     temp += " "
             temp += "|"
-            matrix.append(list(temp))
+            matrix.append([temp])
 
-        temp = "+" + "-" * self.width + "+"
-        matrix.append(list(temp))
+        temp = f"+{self.width * '-'}+"
+        matrix.append([temp])
         return matrix
 
     def update(self, direction):
