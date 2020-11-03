@@ -162,7 +162,7 @@ def play(stdscr: "curses._CursesWindow", highscore: int):
     score = 0
     game = Game(10, 20)
     while not game.isDead:
-        stdscr.timeout(max(100, 1000 - score * 20))
+        stdscr.timeout(max(50, 800 - score * 20))
         stdscr.refresh()
         stdscr.addstr(0, 0, f"Score : {score}\n")
         stdscr.addstr(game.render())
@@ -170,11 +170,6 @@ def play(stdscr: "curses._CursesWindow", highscore: int):
             direction = stdscr.getkey().upper()
         except curses.error:
             direction = ""
-        while direction not in ("W", "S", "A", "D", "", "Q"):
-            try:
-                direction = stdscr.getkey().upper()
-            except curses.error:
-                direction = ""
         if direction == "Q":
             curses.endwin()
             return menu(highscore)
