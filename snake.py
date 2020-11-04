@@ -192,17 +192,16 @@ def menu(highscore = 0):
     """
     print("Welcome, motherfucker !")
     print("This is Snake-The Game")
-    # print("Wanna play motherfucker ? (y/n)")
     print("1. Play\n2. How to play\n3. Exit")
     ans = input().strip()
-    while ans not in ["1", "2", "3"]:
+    while ans not in "123":
         ans = input().strip()
     if ans == "1":
         print("Let's go motherfucker !")
         curses.wrapper(play, highscore)
     elif ans == "2":
         print(howTo)
-        print('Press enter to continue')
+        print("Press enter to continue")
         input()
         menu()
 
