@@ -154,26 +154,31 @@ class Game:
         self.isDead = self.snake.isDead
 
     def render(self):
-        matrix = self.board_matrix()
-        return "\n".join(["".join(c) for c in matrix])
+        return "\n".join(["".join(c) for c in self.board_matrix()])
 
 
 def play(stdscr: "curses._CursesWindow", highscore: int):
     score = 0
     game = Game(10, 20)
+    scrtimeout = stdscr.timeout
+    scrrefresh = stdscr.refresh
+    scraddstr = stdscr.addstr
+    getkey = stdscr.getkey
+    update = game.update
+    render = game.render
     while not game.isDead:
-        stdscr.timeout(max(50, 800 - score * 20))
-        stdscr.refresh()
-        stdscr.addstr(0, 0, f"Score : {score}\n")
-        stdscr.addstr(game.render())
+        scrtimeout(max(50, 800 - score * 20))
+        scrrefresh()
+        scraddstr(0, 0, f"Score : {score}\n")
+        scraddstr(render())
         try:
-            direction = stdscr.getkey().upper()
+            direction = getkey().upper()
         except curses.error:
             direction = ""
         if direction == "Q":
             curses.endwin()
             return menu(highscore)
-        game.update(direction)
+        update(direction)
         score = game.score
     curses.endwin()
     highscore = max(score, highscore)
