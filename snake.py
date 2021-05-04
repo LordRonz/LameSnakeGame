@@ -199,7 +199,7 @@ def menu(highscore = 0):
     print("This is Snake-The Game")
     print("1. Play\n2. How to play\n3. Exit")
     ans = input().strip()
-    while ans not in "123":
+    while ans not in "123":2
         ans = input().strip()
     if ans == "1":
         print("Let's go motherfucker !")
